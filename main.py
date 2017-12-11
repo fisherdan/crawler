@@ -10,6 +10,7 @@ def execute():
     home_page = ''
     thread_count = 8
 
+    # project_name must be provided, the program will use this variable as the database tables' prefix
     while project_name == '':
         project_name = input('Please give a name to the project:')
 
@@ -21,7 +22,7 @@ def execute():
     regx_home_page = re.compile(r'^http[s]?://.+$')
     if not regx_home_page.match(home_page):
         print('{} is not a valid home page'.format(home_page))
-        exit()
+        exit()  # if home_page url is not valid, the program will stop
 
     print('Home page is', home_page)
 
@@ -35,7 +36,7 @@ def execute():
             print('Your input is not a valid number, worker number will be:', thread_count)
 
     (lambda x: globals()[x])(project_settings.DB_CLASS_NAME)(home_page, project_name + '_pages')
-    Spider(project_name, home_page, DomainHelpers.get_domain_name(home_page), project_settings.HTML_RESOLVER_NAME)
+    Spider(home_page, DomainHelpers.get_domain_name(home_page), project_settings.HTML_RESOLVER_NAME)
 
     worker = Worker(thread_count, project_name)
     worker.create_threads()

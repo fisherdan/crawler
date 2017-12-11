@@ -1,6 +1,8 @@
 from abc import ABCMeta, abstractmethod
 
 
+# DbBase is set metaclass=ABCMeta,
+# so all @abstractmethod defined in class should be implemented in all DbBase's descendant classes
 class DbBase(metaclass=ABCMeta):
     @abstractmethod
     def __init__(self, file_name):

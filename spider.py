@@ -8,14 +8,12 @@ import ssl
 
 class Spider:
     DB = None
-    PROJECT_NAME = ''
     BASE_URL = ''
     DOMAIN_NAME = ''
     HTML_RESOLVER = ''
 
-    def __init__(self, project_name, base_url, domain_name, html_resolver):
+    def __init__(self, base_url, domain_name, html_resolver):
         Spider.DB = (lambda x: globals()[x])(project_settings.DB_CLASS_NAME)
-        Spider.PROJECT_NAME = project_name
         Spider.BASE_URL = base_url
         Spider.DOMAIN_NAME = domain_name
         Spider.HTML_RESOLVER = html_resolver

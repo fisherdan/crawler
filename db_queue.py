@@ -21,7 +21,8 @@ class MongoDbQueue(DbBase):
 
         MongoDbQueue.db = MongoClient(project_settings.DB_CONNECTION_STRING)[project_settings.DB_REPOSITORY_NAME]
 
-        MongoDbQueue.db[MongoDbQueue.tbl_name].drop()
+        if project_settings.DB_DROP_TABLES_WHEN_RESTART:
+            MongoDbQueue.db[MongoDbQueue.tbl_name].drop()
 
         # add home page to make crawler start
         MongoDbQueue.save_pending_queue([home_page])
